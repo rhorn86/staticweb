@@ -1,8 +1,7 @@
-from textnode import TextNode, TextType
+from copy_static import copy_static
 
 def main():
 
-    text_node = TextNode("Here is some text", TextType.LINK, "https://archlinux.org")
-    print(text_node)
+    copy_static("static", "public")
 
 main()
