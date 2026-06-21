@@ -3,7 +3,7 @@ from markdown_to_html import markdown_to_html_node
 from extract_title import extract_title
 
 
-def generate_page(from_path: str, template_path: str, dest_path: str):
+def generate_page(from_path: str, template_path: str, dest_path: str, basepath: str = "/"):
 
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
@@ -19,6 +19,8 @@ def generate_page(from_path: str, template_path: str, dest_path: str):
 
     template_with_title = template.replace("{{ Title }}", title)
     html_document = template_with_title.replace("{{ Content }}", content)
+    html_document = html_document.replace("href=\"/", f"href=\"{basepath}")
+    html_document = html_document.replace("src=\"/", f"src=\"{basepath}")
 
     os.makedirs(os.path.dirname(dest_path), exist_ok=True)
     with open(dest_path, "w") as f:
